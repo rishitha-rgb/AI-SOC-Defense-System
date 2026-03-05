@@ -7,15 +7,15 @@ app = FastAPI()
 
 @app.get("/")
 def home():
-    return {"message":"AI SOC Defense Platform"}
+    return {"message": "AI SOC Defense Platform Running"}
 
 @app.post("/analyze")
-def analyze(request:str):
+def analyze(request: str):
 
     if firewall_check(request):
         status = "blocked by firewall"
-        log_event(request,status)
-        return {"result":status}
+        log_event(request, status)
+        return {"result": status}
 
     prediction = predict_attack(request)
 
@@ -24,6 +24,6 @@ def analyze(request:str):
     else:
         status = "allowed"
 
-    log_event(request,status)
+    log_event(request, status)
 
-    return {"result":status}
+    return {"result": status}
